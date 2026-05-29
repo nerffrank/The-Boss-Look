@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Boss Look | Admin Dashboard</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="logo-cropped.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body class="admin-body">
+  <main class="admin-shell">
+    <header class="admin-topbar">
+      <a class="brand" href="index.html" aria-label="The Boss Look site home">
+        <img src="logo.png.png" alt="The Boss Look logo" />
+        <div class="brand-text">
+          <span class="brand-kicker">Private dashboard</span>
+          <span class="brand-name">The Boss Look</span>
+        </div>
+      </a>
+
+      <div class="admin-topbar-actions">
+        <a class="btn btn-ghost admin-link" href="index.html">Back to site</a>
+        <button class="btn btn-solid admin-signout" id="admin-signout" type="button" hidden>Sign out</button>
+      </div>
+    </header>
+
+    <section class="admin-panel admin-auth-panel" id="admin-auth-panel">
+      <div>
+        <p class="eyebrow">Secure access</p>
+        <h1>Admin booking dashboard</h1>
+        <p>
+          Sign in with the authorised admin email to view bookings, update statuses, and manage the
+          launch schedule without opening Supabase directly.
+        </p>
+      </div>
+
+      <form class="admin-auth-form" id="admin-auth-form">
+        <label>
+          <span>Admin email</span>
+          <input id="admin-email" name="adminEmail" type="email" required />
+        </label>
+        <button class="btn btn-solid" id="admin-auth-submit" type="submit">Send sign-in link</button>
+        <p class="admin-feedback" id="admin-feedback" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="admin-panel admin-dashboard" id="admin-dashboard" hidden>
+      <div class="admin-overview">
+        <div>
+          <p class="eyebrow">Overview</p>
+          <h2>Appointments</h2>
+          <p id="admin-session-copy">Signed in and ready to manage bookings.</p>
+        </div>
+
+        <div class="admin-metrics">
+          <article>
+            <strong id="metric-total">0</strong>
+            <span>Total bookings</span>
+          </article>
+          <article>
+            <strong id="metric-today">0</strong>
+            <span>Today</span>
+          </article>
+          <article>
+            <strong id="metric-pending">0</strong>
+            <span>Pending</span>
+          </article>
+        </div>
+      </div>
+
+      <div class="admin-toolbar">
+        <label>
+          <span>Status</span>
+          <select id="admin-filter-status">
+            <option value="all">All statuses</option>
+            <option value="pending">Pending</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Date view</span>
+          <select id="admin-filter-date">
+            <option value="all">All dates</option>
+            <option value="today">Today</option>
+            <option value="upcoming">Upcoming</option>
+            <option value="past">Past</option>
+          </select>
+        </label>
+
+        <button class="btn btn-ghost admin-refresh" id="admin-refresh" type="button">Refresh</button>
+      </div>
+
+      <div class="admin-list-empty" id="admin-list-empty">No bookings match the current filters.</div>
+      <div class="admin-list" id="admin-list"></div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="booking-config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

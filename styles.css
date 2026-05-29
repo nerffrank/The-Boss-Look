@@ -610,6 +610,10 @@ a {
   font-size: 0.92rem;
 }
 
+.footer a {
+  color: rgba(213, 161, 90, 0.92);
+}
+
 @media (max-width: 980px) {
   .navbar,
   .navbar.scrolled,

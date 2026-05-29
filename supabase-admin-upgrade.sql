@@ -1,25 +1,16 @@
-create extension if not exists pgcrypto;
+alter table public.appointments
+add column if not exists status text not null default 'pending';
 
-create table if not exists public.appointments (
-  id uuid primary key default gen_random_uuid(),
-  service text not null,
-  booking_date date not null,
-  booking_time time not null,
-  customer_name text not null,
-  customer_phone text not null,
-  customer_email text not null,
-  notes text not null default '',
-  status text not null default 'pending',
-  created_at timestamptz not null default timezone('utc', now()),
-  updated_at timestamptz not null default timezone('utc', now())
-);
+alter table public.appointments
+add column if not exists updated_at timestamptz not null default timezone('utc', now());
+
+alter table public.appointments
+drop constraint if exists appointments_unique_slot;
 
 drop index if exists public.appointments_active_slot_unique;
 create unique index appointments_active_slot_unique
 on public.appointments (booking_date, booking_time)
 where status <> 'cancelled';
-
-alter table public.appointments enable row level security;
 
 create table if not exists public.admin_users (
   email text primary key,
@@ -28,12 +19,9 @@ create table if not exists public.admin_users (
 
 alter table public.admin_users enable row level security;
 
-drop policy if exists "Public can create bookings" on public.appointments;
-create policy "Public can create bookings"
-on public.appointments
-for insert
-to anon
-with check (true);
+insert into public.admin_users (email)
+values ('aidoofrank907@gmail.com')
+on conflict (email) do nothing;
 
 create or replace function public.booked_slots_for_date(requested_date date)
 returns table (booking_time time)
