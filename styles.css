@@ -478,6 +478,12 @@ a {
   font: inherit;
 }
 
+.booking-form select,
+.booking-form option {
+  color: var(--text);
+  background: #2b2620;
+}
+
 .booking-form textarea {
   min-height: 120px;
   resize: vertical;

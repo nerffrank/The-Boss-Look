@@ -4,31 +4,7 @@ const isSupabaseMode =
   bookingConfig.provider === "supabase" &&
   Boolean(bookingConfig.supabaseUrl) &&
   Boolean(bookingConfig.supabaseAnonKey);
-
-const services = [
-  "Buzz Cut",
-  "Crew Cut",
-  "Ivy League",
-  "Ceaser Cut",
-  "Flat Top",
-  "Low Fade",
-  "Mid Fade",
-  "High Fade",
-  "Skin Fade",
-  "Taper",
-  "Taper Fade",
-  "Undercut",
-  "Pompadour",
-  "Quiff",
-  "Slick Back",
-  "Textured Crop",
-  "Layered Cut",
-  "Shaggy Cut",
-  "Perm Cut",
-  "Dreadlocks",
-  "Twists",
-  "Hair Dye"
-];
+const defaultServiceLabel = "In-shop consultation";
 
 const openingHours = {
   0: { start: "14:00", end: "22:00" },
@@ -40,7 +16,6 @@ const openingHours = {
   6: { start: "10:00", end: "21:00" }
 };
 
-const serviceSelect = document.getElementById("service");
 const dateInput = document.getElementById("booking-date");
 const timeSelect = document.getElementById("booking-time");
 const bookingForm = document.getElementById("booking-form");
@@ -51,7 +26,6 @@ const bookingsEmpty = document.getElementById("bookings-empty");
 const bookingSummary = document.getElementById("booking-summary");
 const clearBookingsButton = document.getElementById("clear-bookings");
 
-populateServices();
 setDateMinimum();
 renderStorageState();
 updateTimeOptions();
@@ -59,15 +33,6 @@ updateTimeOptions();
 dateInput.addEventListener("change", updateTimeOptions);
 bookingForm.addEventListener("submit", handleBookingSubmit);
 clearBookingsButton.addEventListener("click", clearBookings);
-
-function populateServices() {
-  services.forEach(function (service) {
-    const option = document.createElement("option");
-    option.value = service;
-    option.textContent = service;
-    serviceSelect.appendChild(option);
-  });
-}
 
 function setDateMinimum() {
   const today = new Date();
@@ -155,7 +120,7 @@ async function handleBookingSubmit(event) {
 
   const booking = {
     id: createBookingId(),
-    service: formData.get("service"),
+    service: defaultServiceLabel,
     date: formData.get("bookingDate"),
     time: formData.get("bookingTime"),
     name: formData.get("customerName").trim(),
@@ -165,7 +130,7 @@ async function handleBookingSubmit(event) {
     createdAt: new Date().toISOString()
   };
 
-  if (!booking.service || !booking.date || !booking.time || !booking.name || !booking.phone || !booking.email) {
+  if (!booking.date || !booking.time || !booking.name || !booking.phone || !booking.email) {
     setFeedback("Please complete every required booking field.", "error");
     return;
   }
