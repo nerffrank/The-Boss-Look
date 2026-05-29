@@ -319,7 +319,7 @@ async function saveBookingToSupabase(booking) {
     method: "POST",
     headers: {
       ...supabaseHeaders(),
-      Prefer: "return=representation"
+      Prefer: "return=minimal"
     },
     body: JSON.stringify([
       {
@@ -345,7 +345,7 @@ async function saveBookingToSupabase(booking) {
     throw new Error("That slot has already been taken. Please choose a different time.");
   }
 
-  throw new Error("Shared booking save failed. Check Supabase setup and try again.");
+  throw new Error(message || "Shared booking save failed. Check Supabase setup and try again.");
 }
 
 function readLocalBookings() {
