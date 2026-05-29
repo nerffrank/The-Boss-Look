@@ -413,9 +413,19 @@ a {
   padding-bottom: 6rem;
 }
 
+.booking-heading {
+  margin-bottom: 2rem;
+}
+
+.booking-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
 .booking-card {
   padding: 2rem;
-  text-align: center;
   background:
     linear-gradient(135deg, rgba(213, 161, 90, 0.13), rgba(255, 255, 255, 0.02)),
     var(--panel-strong);
@@ -424,6 +434,162 @@ a {
 .booking-card p {
   max-width: 42rem;
   margin: 0 auto 1.4rem;
+}
+
+.booking-form-card,
+.booking-side-card,
+.admin-card {
+  text-align: left;
+}
+
+.booking-form-card h3,
+.booking-side-card h3,
+.admin-card h3 {
+  font-size: 1.8rem;
+  margin-top: 0.35rem;
+}
+
+.booking-form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.booking-form label {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.booking-form label span {
+  font-size: 0.88rem;
+  color: rgba(247, 241, 232, 0.78);
+}
+
+.booking-form input,
+.booking-form select,
+.booking-form textarea {
+  width: 100%;
+  min-height: 52px;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  font: inherit;
+}
+
+.booking-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.booking-form input::placeholder,
+.booking-form textarea::placeholder {
+  color: rgba(247, 241, 232, 0.46);
+}
+
+.booking-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.booking-submit-row {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 0.35rem;
+}
+
+.booking-submit {
+  border: 0;
+  cursor: pointer;
+}
+
+.booking-helper,
+.booking-feedback,
+.booking-summary span,
+.booking-rules li,
+.bookings-empty,
+.booking-entry p,
+.booking-entry span {
+  color: rgba(247, 241, 232, 0.74);
+}
+
+.booking-helper,
+.booking-feedback {
+  margin: 0;
+  max-width: none;
+  font-size: 0.95rem;
+}
+
+.booking-feedback[data-state="success"] {
+  color: #9edd8a;
+}
+
+.booking-feedback[data-state="error"] {
+  color: #f1a4a4;
+}
+
+.booking-rules {
+  display: grid;
+  gap: 0.9rem;
+  margin: 1.5rem 0;
+  padding-left: 1.1rem;
+}
+
+.booking-summary {
+  display: grid;
+  gap: 0.35rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.admin-card {
+  display: grid;
+  gap: 1rem;
+}
+
+.admin-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.admin-clear {
+  min-height: 44px;
+  padding-inline: 1rem;
+  cursor: pointer;
+}
+
+.bookings-list {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.booking-entry {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1rem 1.05rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.booking-entry-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.booking-entry strong,
+.booking-summary strong {
+  font-size: 1.02rem;
+}
+
+.booking-entry p {
+  margin: 0;
 }
 
 .footer {
@@ -462,7 +628,9 @@ a {
   .hero-grid,
   .intro-band,
   .experience-grid,
-  .schedule-grid {
+  .schedule-grid,
+  .booking-layout,
+  .booking-form-grid {
     grid-template-columns: 1fr;
   }
 
@@ -516,5 +684,11 @@ a {
 
   .service-track {
     grid-auto-columns: 85%;
+  }
+
+  .admin-header,
+  .booking-entry-top {
+    flex-direction: column;
+    align-items: stretch;
   }
 }

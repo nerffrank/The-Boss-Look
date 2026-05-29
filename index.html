@@ -49,12 +49,7 @@
       <a href="#services">Services</a>
       <a href="#experience">Experience</a>
       <a href="#hours">Hours</a>
-      <a
-        href="https://www.fresha.com/book-now/the-boss-look-iq3prrj2/all-offer?share=true&pId=2869396"
-        class="nav-btn"
-        target="_blank"
-        rel="noreferrer"
-      >Book now</a>
+      <a href="#book" class="nav-btn">Book now</a>
     </nav>
   </header>
 
@@ -71,12 +66,7 @@
           </p>
 
           <div class="hero-actions">
-            <a
-              href="https://www.fresha.com/book-now/the-boss-look-iq3prrj2/all-offer?share=true&pId=2869396"
-              class="btn btn-solid"
-              target="_blank"
-              rel="noreferrer"
-            >Book Appointment</a>
+            <a href="#book" class="btn btn-solid">Book Appointment</a>
             <a href="#services" class="btn btn-ghost">View Services</a>
           </div>
 
@@ -114,7 +104,7 @@
       <div class="section-heading">
         <p class="eyebrow">Services</p>
         <h2>Cut, shape, refine.</h2>
-        <p>Choose your service type, then book your slot online with Fresha.</p>
+        <p>Choose your service type, then book your slot directly through The Boss Look.</p>
       </div>
 
       <div class="service-carousel" aria-label="Hair services carousel">
@@ -200,7 +190,7 @@
         </div>
 
         <div class="contact-card">
-          <p>Walk-ins may be available, but booking ahead on Fresha keeps your slot locked in.</p>
+          <p>Walk-ins may be available, but booking ahead keeps your preferred slot locked in.</p>
           <strong>Accra Dome, Pillar 2, Ghana</strong>
           <span>Phone: coming soon</span>
           <span>Email: coming soon</span>
@@ -210,16 +200,108 @@
     </section>
 
     <section class="section booking" id="book">
-      <div class="booking-card">
+      <div class="section-heading booking-heading">
         <p class="eyebrow">Ready when you are</p>
         <h2>Book your chair and come in looking average, leave looking expensive.</h2>
-        <a
-          href="https://www.fresha.com/book-now/the-boss-look-iq3prrj2/all-offer?share=true&pId=2869396"
-          class="btn btn-solid"
-          target="_blank"
-          rel="noreferrer"
-        >Book Now</a>
+        <p>
+          This first-party booking flow lets clients choose a service, pick a slot, and send their
+          details directly through the site.
+        </p>
       </div>
+
+      <div class="booking-layout">
+        <section class="booking-card booking-form-card" aria-labelledby="booking-form-title">
+          <div>
+            <p class="eyebrow">Booking form</p>
+            <h3 id="booking-form-title">Reserve your appointment</h3>
+          </div>
+
+          <form class="booking-form" id="booking-form">
+            <label>
+              <span>Service</span>
+              <select id="service" name="service" required>
+                <option value="">Choose a service</option>
+              </select>
+            </label>
+
+            <div class="booking-form-grid">
+              <label>
+                <span>Date</span>
+                <input id="booking-date" name="bookingDate" type="date" required />
+              </label>
+              <label>
+                <span>Time</span>
+                <select id="booking-time" name="bookingTime" required disabled>
+                  <option value="">Select a date first</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="booking-form-grid">
+              <label>
+                <span>Full name</span>
+                <input id="customer-name" name="customerName" type="text" placeholder="Your name" required />
+              </label>
+              <label>
+                <span>Phone number</span>
+                <input id="customer-phone" name="customerPhone" type="tel" placeholder="+233..." required />
+              </label>
+            </div>
+
+            <label>
+              <span>Email address</span>
+              <input id="customer-email" name="customerEmail" type="email" placeholder="you@example.com" required />
+            </label>
+
+            <label>
+              <span>Notes for the barber</span>
+              <textarea id="booking-notes" name="bookingNotes" rows="4" placeholder="Style reference, beard trim, colour request, anything useful."></textarea>
+            </label>
+
+            <div class="booking-submit-row">
+              <button class="btn btn-solid booking-submit" id="booking-submit" type="submit">Confirm Booking</button>
+              <p class="booking-helper">Sunday slots run 14:00 to 22:00. All other days run 10:00 to 21:00.</p>
+            </div>
+
+            <p class="booking-feedback" id="booking-feedback" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <aside class="booking-card booking-side-card">
+          <div>
+            <p class="eyebrow">Booking rules</p>
+            <h3>How this MVP works</h3>
+          </div>
+
+          <ul class="booking-rules">
+            <li>Slots are generated from the live shop opening hours.</li>
+            <li>Shared mode blocks already-booked slots across devices once a backend is connected.</li>
+            <li>Each appointment stores service, customer details, and notes.</li>
+            <li>Walk-ins can still be managed manually outside the system.</li>
+          </ul>
+
+          <div class="booking-summary" id="booking-summary">
+            <strong>Booking system starting in local mode</strong>
+            <span>Connect a shared backend to make bookings sync across all devices.</span>
+          </div>
+        </aside>
+      </div>
+
+      <section class="booking-card admin-card" aria-labelledby="bookings-dashboard-title">
+        <div class="admin-header">
+          <div>
+            <p class="eyebrow">Status</p>
+            <h3 id="bookings-dashboard-title">Booking storage view</h3>
+          </div>
+          <button class="btn btn-ghost admin-clear" id="clear-bookings" type="button">Clear local data</button>
+        </div>
+
+        <div class="bookings-empty" id="bookings-empty">
+          Bookings saved through this browser will appear here for testing and admin review.
+        </div>
+
+        <div class="bookings-list" id="bookings-list"></div>
+      </section>
     </section>
   </main>
 
@@ -250,5 +332,7 @@
       });
     }
   </script>
+  <script src="booking-config.js"></script>
+  <script src="booking.js"></script>
 </body>
 </html>
