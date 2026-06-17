@@ -109,6 +109,15 @@
   font: inherit;
 }
 
+.admin-toolbar select {
+  color-scheme: dark;
+}
+
+.admin-toolbar select option {
+  background: #1b1814;
+  color: #f7f1e8;
+}
+
 .admin-auth-form input::placeholder {
   color: rgba(247, 241, 232, 0.46);
 }
