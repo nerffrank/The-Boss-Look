@@ -19,8 +19,17 @@ create table if not exists public.admin_users (
 
 alter table public.admin_users enable row level security;
 
+drop policy if exists "Admin users can read own access record" on public.admin_users;
+create policy "Admin users can read own access record"
+on public.admin_users
+for select
+to authenticated
+using (email = auth.email());
+
 insert into public.admin_users (email)
-values ('aidoofrank907@gmail.com')
+values
+  ('aidoofrank907@gmail.com'),
+  ('thebosslookbarbers@gmail.com')
 on conflict (email) do nothing;
 
 create or replace function public.booked_slots_for_date(requested_date date)

@@ -27,12 +27,16 @@ const bookingSummary = document.getElementById("booking-summary");
 const clearBookingsButton = document.getElementById("clear-bookings");
 
 setDateMinimum();
-renderStorageState();
+if (bookingSummary || bookingsEmpty || bookingsList) {
+  renderStorageState();
+}
 updateTimeOptions();
 
 dateInput.addEventListener("change", updateTimeOptions);
 bookingForm.addEventListener("submit", handleBookingSubmit);
-clearBookingsButton.addEventListener("click", clearBookings);
+if (clearBookingsButton) {
+  clearBookingsButton.addEventListener("click", clearBookings);
+}
 
 function setDateMinimum() {
   const today = new Date();
@@ -73,7 +77,7 @@ async function updateTimeOptions() {
   } catch (error) {
     console.error(error);
     disableTimeSelect("Could not load time slots");
-    setFeedback("We could not load slots right now. Please try again.", "error");
+    setFeedback("We could not load available times right now. Please try again shortly.", "error");
   }
 }
 
@@ -141,19 +145,24 @@ async function handleBookingSubmit(event) {
   try {
     if (isSupabaseMode) {
       await saveBookingToSupabase(booking);
-      setFeedback("Booking saved to the shared booking system.", "success");
+      setFeedback("Your booking has been received. The Boss Look team will confirm your appointment by email.", "success");
     } else {
       saveBookingLocally(booking);
-      setFeedback("Booking saved. The slot is now blocked on this device.", "success");
+      setFeedback("Your booking has been received. The Boss Look team will confirm your appointment by email.", "success");
     }
 
     bookingForm.reset();
     setDateMinimum();
     await updateTimeOptions();
-    renderStorageState();
+    if (bookingSummary || bookingsEmpty || bookingsList) {
+      renderStorageState();
+    }
   } catch (error) {
     console.error(error);
-    setFeedback(error.message || "We could not save this booking. Please try again.", "error");
+    setFeedback(
+      error.message || "We could not submit your booking right now. Please try again or email thebosslookbarbers@gmail.com.",
+      "error"
+    );
   } finally {
     bookingSubmitButton.disabled = false;
     bookingSubmitButton.textContent = "Confirm Booking";
@@ -161,41 +170,53 @@ async function handleBookingSubmit(event) {
 }
 
 function renderStorageState() {
+  if (!bookingSummary && !bookingsEmpty && !bookingsList) {
+    return;
+  }
+
   if (isSupabaseMode) {
     bookingSummary.innerHTML =
-      "<strong>Shared booking backend connected</strong><span>Bookings now sync through Supabase across devices. Build a protected admin view next.</span>";
-    bookingsEmpty.hidden = false;
-    bookingsEmpty.textContent =
-      "Public admin listing is hidden in shared mode so customer details are not exposed on the live website.";
-    bookingsList.innerHTML = "";
-    clearBookingsButton.hidden = true;
+      "<strong>Appointment confirmations are sent by email.</strong><span>Choose your time, submit your details, and wait for confirmation from The Boss Look.</span>";
+    if (bookingsEmpty) {
+      bookingsEmpty.hidden = true;
+    }
+    if (bookingsList) {
+      bookingsList.innerHTML = "";
+    }
+    if (clearBookingsButton) {
+      clearBookingsButton.hidden = true;
+    }
     return;
   }
 
   const bookings = readLocalBookings().sort(compareBookings);
-  bookingsList.innerHTML = "";
-  clearBookingsButton.hidden = false;
+  if (bookingsList) {
+    bookingsList.innerHTML = "";
+  }
+  if (clearBookingsButton) {
+    clearBookingsButton.hidden = false;
+  }
 
   if (!bookings.length) {
-    bookingsEmpty.hidden = false;
-    bookingsEmpty.textContent = "Bookings saved through this browser will appear here for testing and admin review.";
-    bookingSummary.innerHTML = "<strong>0 bookings saved</strong><span>No appointments stored in this browser yet.</span>";
+    if (bookingsEmpty) {
+      bookingsEmpty.hidden = true;
+    }
+    bookingSummary.innerHTML =
+      "<strong>Appointment confirmations are sent by email.</strong><span>Choose your time, submit your details, and wait for confirmation from The Boss Look.</span>";
     return;
   }
 
-  bookingsEmpty.hidden = true;
+  if (bookingsEmpty) {
+    bookingsEmpty.hidden = true;
+  }
   bookingSummary.innerHTML =
-    "<strong>" +
-    bookings.length +
-    " booking" +
-    (bookings.length === 1 ? "" : "s") +
-    " saved locally</strong><span>Latest slot: " +
-    formatBookingDate(bookings[bookings.length - 1].date) +
-    " at " +
-    bookings[bookings.length - 1].time +
-    ".</span>";
+    "<strong>Appointment request received.</strong><span>Your selected slot has been recorded for confirmation.</span>";
 
   bookings.forEach(function (booking) {
+    if (!bookingsList) {
+      return;
+    }
+
     const entry = document.createElement("article");
     entry.className = "booking-entry";
 
@@ -232,9 +253,11 @@ function clearBookings() {
   }
 
   localStorage.removeItem(bookingStorageKey);
-  renderStorageState();
+  if (bookingSummary || bookingsEmpty || bookingsList) {
+    renderStorageState();
+  }
   updateTimeOptions();
-  setFeedback("Local booking data cleared from this browser.", "success");
+  setFeedback("Booking data was cleared from this browser.", "success");
 }
 
 async function getBookedSlots(dateString) {
@@ -310,7 +333,7 @@ async function saveBookingToSupabase(booking) {
     throw new Error("That slot has already been taken. Please choose a different time.");
   }
 
-  throw new Error(message || "Shared booking save failed. Check Supabase setup and try again.");
+  throw new Error(message || "We could not submit your booking right now. Please try again shortly.");
 }
 
 function readLocalBookings() {

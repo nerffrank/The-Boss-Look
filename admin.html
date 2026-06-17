@@ -37,9 +37,17 @@
         <p class="eyebrow">Secure access</p>
         <h1>Admin booking dashboard</h1>
         <p>
-          Sign in with the authorised admin email to view bookings, update statuses, and manage the
+          Sign in with one of the authorised admin emails to view bookings, update statuses, and manage the
           launch schedule without opening Supabase directly.
         </p>
+
+        <div class="admin-access-note" id="admin-access-note">
+          <strong>Admin access URL</strong>
+          <code id="admin-current-url">Loading...</code>
+          <p id="admin-access-hint">
+            Keep this page open while using the email sign-in link so the dashboard can complete sign-in correctly.
+          </p>
+        </div>
       </div>
 
       <form class="admin-auth-form" id="admin-auth-form">
@@ -47,8 +55,47 @@
           <span>Admin email</span>
           <input id="admin-email" name="adminEmail" type="email" required />
         </label>
-        <button class="btn btn-solid" id="admin-auth-submit" type="submit">Send sign-in link</button>
+
+        <label>
+          <span>Password</span>
+          <input id="admin-password" name="adminPassword" type="password" autocomplete="current-password" required />
+        </label>
+
+        <div class="admin-auth-actions">
+          <button class="btn btn-solid" id="admin-auth-submit" type="submit">Sign in</button>
+          <button class="btn btn-ghost" id="admin-password-reset" type="button">Email reset link</button>
+        </div>
+
+        <button class="btn btn-ghost admin-magic-link" id="admin-magic-link" type="button">Use magic link instead</button>
+        <p class="admin-auth-helper">
+          Use email + password for everyday access. If you have not created a password yet, send a reset link first.
+        </p>
         <p class="admin-feedback" id="admin-feedback" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="admin-panel admin-recovery-panel" id="admin-recovery-panel" hidden>
+      <div>
+        <p class="eyebrow">Password recovery</p>
+        <h2>Set a new admin password</h2>
+        <p id="admin-recovery-copy">
+          Choose a new password for the selected admin email, then sign in normally from this dashboard.
+        </p>
+      </div>
+
+      <form class="admin-auth-form" id="admin-recovery-form">
+        <label>
+          <span>New password</span>
+          <input id="admin-recovery-password" name="adminRecoveryPassword" type="password" autocomplete="new-password" required />
+        </label>
+
+        <label>
+          <span>Confirm new password</span>
+          <input id="admin-recovery-confirm" name="adminRecoveryConfirm" type="password" autocomplete="new-password" required />
+        </label>
+
+        <button class="btn btn-solid" id="admin-recovery-submit" type="submit">Save new password</button>
+        <p class="admin-feedback" id="admin-recovery-feedback" aria-live="polite"></p>
       </form>
     </section>
 
