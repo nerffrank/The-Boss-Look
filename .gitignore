@@ -1,0 +1,5 @@
+node_modules/
+.supabase/
+.supabase-cli-home*/
+supabase/.temp/
+supabase/supabase/

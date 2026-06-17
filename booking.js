@@ -4,6 +4,8 @@ const isSupabaseMode =
   bookingConfig.provider === "supabase" &&
   Boolean(bookingConfig.supabaseUrl) &&
   Boolean(bookingConfig.supabaseAnonKey);
+const notificationMode = String(bookingConfig.notificationMode || "disabled").toLowerCase();
+const notificationFunctionName = bookingConfig.notificationFunctionName || "booking-notifications";
 const defaultServiceLabel = "In-shop consultation";
 
 const openingHours = {
@@ -144,7 +146,7 @@ async function handleBookingSubmit(event) {
 
   try {
     if (isSupabaseMode) {
-      await saveBookingToSupabase(booking);
+      await saveBookingToSharedBackend(booking);
       setFeedback("Your booking has been received. The Boss Look team will confirm your appointment by email.", "success");
     } else {
       saveBookingLocally(booking);
@@ -336,6 +338,44 @@ async function saveBookingToSupabase(booking) {
   throw new Error(message || "We could not submit your booking right now. Please try again shortly.");
 }
 
+async function saveBookingToSharedBackend(booking) {
+  if (notificationMode === "edge-function") {
+    await saveBookingViaNotificationFunction(booking);
+    return;
+  }
+
+  await saveBookingToSupabase(booking);
+}
+
+async function saveBookingViaNotificationFunction(booking) {
+  const response = await fetch(supabaseFunctionUrl(notificationFunctionName), {
+    method: "POST",
+    headers: supabaseHeaders(),
+    body: JSON.stringify({
+      service: booking.service,
+      date: booking.date,
+      time: booking.time,
+      name: booking.name,
+      phone: booking.phone,
+      email: booking.email,
+      notes: booking.notes
+    })
+  });
+
+  if (response.ok) {
+    return;
+  }
+
+  const errorPayload = await safeJson(response);
+  const message = extractSupabaseErrorMessage(errorPayload);
+
+  if (response.status === 409 || message.includes("appointments_active_slot_unique") || message.includes("duplicate key")) {
+    throw new Error("That slot has already been taken. Please choose a different time.");
+  }
+
+  throw new Error(message || "We could not submit your booking right now. Please try again shortly.");
+}
+
 function readLocalBookings() {
   try {
     const storedBookings = localStorage.getItem(bookingStorageKey);
@@ -417,6 +457,10 @@ function supabaseTableUrl(tableName) {
 
 function supabaseRpcUrl(functionName) {
   return bookingConfig.supabaseUrl.replace(/\/$/, "") + "/rest/v1/rpc/" + functionName;
+}
+
+function supabaseFunctionUrl(functionName) {
+  return bookingConfig.supabaseUrl.replace(/\/$/, "") + "/functions/v1/" + functionName;
 }
 
 async function safeJson(response) {
