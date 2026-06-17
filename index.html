@@ -45,7 +45,19 @@
       </div>
     </a>
 
-    <nav class="nav-links" aria-label="Primary navigation">
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="primary-nav"
+      aria-label="Open navigation menu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="nav-links" id="primary-nav" aria-label="Primary navigation">
       <a href="#services">Services</a>
       <a href="#experience">Experience</a>
       <a href="#gallery">Gallery</a>
@@ -245,12 +257,10 @@
             <div class="team-media-track" data-carousel-track>
               <figure class="team-slide is-active" data-carousel-slide>
                 <img src="images/team-photo.jpeg" alt="Three members of The Boss Look team seated together in the shop" loading="lazy" />
-                <figcaption>Team portrait in the studio lounge area.</figcaption>
               </figure>
 
               <figure class="team-slide" data-carousel-slide>
                 <img src="images/team-photo-group.png" alt="The Boss Look team gathered together under the wall sign" loading="lazy" />
-                <figcaption>The wider Boss Look team together in the studio.</figcaption>
               </figure>
             </div>
 
@@ -266,19 +276,6 @@
             <button class="team-dot is-active" type="button" data-carousel-dot="0" aria-label="Show first team photo"></button>
             <button class="team-dot" type="button" data-carousel-dot="1" aria-label="Show second team photo"></button>
           </div>
-        </div>
-
-        <div class="team-copy">
-          <p class="eyebrow">Meet the team</p>
-          <h2>Good energy, clean work, serious attention to detail.</h2>
-          <p>
-            The Boss Look is more than a chair and clippers. The people behind it bring personality,
-            care, and confidence into every appointment, which is exactly why the studio already feels memorable.
-          </p>
-          <p>
-            Whether you already know the style you want or want to talk it through when you arrive,
-            the atmosphere stays welcoming, focused, and professional from start to finish.
-          </p>
         </div>
       </div>
     </section>
@@ -304,7 +301,11 @@
         <div class="contact-card visit-card">
           <p>Walk-ins may be available, but booking ahead gives the team a better chance to confirm your preferred time.</p>
           <strong>The Boss Look, Dome Pillar 2, Palm Avenue, Accra, Ghana</strong>
-          <span>Email: thebosslookbarbers@gmail.com</span>
+          <span class="visit-landmark">Landmark: about 500m from Home Decor.</span>
+          <div class="contact-email-block">
+            <span class="contact-email-label">Email</span>
+            <a class="contact-email-link" href="mailto:thebosslookbarbers@gmail.com">thebosslookbarbers@gmail.com</a>
+          </div>
 
           <div class="contact-actions">
             <a class="btn btn-solid" href="mailto:thebosslookbarbers@gmail.com">Email Us</a>
@@ -332,7 +333,7 @@
             </div>
             <div>
               <strong>Venue</strong>
-              <span>The Boss Look, Dome Pillar 2, Palm Avenue, Accra, Ghana</span>
+              <span>The Boss Look, Dome Pillar 2, Palm Avenue, Accra, Ghana. About 500m from Home Decor.</span>
             </div>
           </div>
 
@@ -441,8 +442,39 @@
   </footer>
 
   <script>
+    const nav = document.querySelector(".navbar");
+    const navToggle = document.querySelector(".nav-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
+    function setMobileMenu(open) {
+      if (!nav || !navToggle) {
+        return;
+      }
+
+      nav.classList.toggle("menu-open", open);
+      navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+      navToggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
+    }
+
+    if (navToggle && navLinks) {
+      navToggle.addEventListener("click", function () {
+        setMobileMenu(!nav.classList.contains("menu-open"));
+      });
+
+      navLinks.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+          setMobileMenu(false);
+        });
+      });
+
+      window.addEventListener("resize", function () {
+        if (window.innerWidth > 980) {
+          setMobileMenu(false);
+        }
+      });
+    }
+
     window.addEventListener("scroll", function () {
-      const nav = document.querySelector(".navbar");
       nav.classList.toggle("scrolled", window.scrollY > 40);
     });
 
@@ -553,7 +585,7 @@
 
     const revealTargets = Array.from(
       document.querySelectorAll(
-        ".section-heading, .gallery-carousel, .price-item, .experience-copy, .experience-list article, .team-media-carousel, .team-copy, .hours-card, .contact-card, .opening-copy, .opening-poster, .booking-card"
+        ".section-heading, .gallery-carousel, .price-item, .experience-copy, .experience-list article, .team-media-carousel, .hours-card, .contact-card, .opening-copy, .opening-poster, .booking-card"
       )
     );
 
