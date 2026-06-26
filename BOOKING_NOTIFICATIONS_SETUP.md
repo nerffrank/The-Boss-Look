@@ -43,7 +43,7 @@ Suggested values:
 - `RESEND_FROM_EMAIL`:
   `The Boss Look <notifications@your-domain.com>`
 - `SHOP_NOTIFICATION_EMAILS`:
-  `aidoofrank907@gmail.com,thebosslookbarbers@gmail.com`
+  `thebosslookbarbers@gmail.com`
 - `BOOKING_NOTIFICATION_EMAILS_ENABLED`:
   `false` during testing, then `true` when ready
 

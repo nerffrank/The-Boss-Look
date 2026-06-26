@@ -2,8 +2,8 @@ window.bookingConfig = {
   provider: "supabase",
   supabaseUrl: "https://erkdqdepyvtssbptykbj.supabase.co",
   supabaseAnonKey: "sb_publishable_ttsLHQqApGTJ6QTbrSYdpw_HLVNu6g9",
-  adminEmail: "aidoofrank907@gmail.com",
-  adminEmails: ["aidoofrank907@gmail.com", "thebosslookbarbers@gmail.com"],
+  adminEmail: "thebosslookbarbers@gmail.com",
+  adminEmails: ["thebosslookbarbers@gmail.com", "aidoofrank907@gmail.com"],
   notificationMode: "edge-function",
   notificationFunctionName: "booking-notifications"
 };
