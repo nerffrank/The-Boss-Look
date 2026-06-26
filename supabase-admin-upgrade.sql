@@ -29,7 +29,8 @@ using (email = auth.email());
 insert into public.admin_users (email)
 values
   ('aidoofrank907@gmail.com'),
-  ('thebosslookbarbers@gmail.com')
+  ('thebosslookbarbers@gmail.com'),
+  ('nkayappiah@icloud.com')
 on conflict (email) do nothing;
 
 create or replace function public.booked_slots_for_date(requested_date date)

@@ -60,7 +60,8 @@ grant execute on function public.booked_slots_for_date(date) to anon;
 insert into public.admin_users (email)
 values
   ('aidoofrank907@gmail.com'),
-  ('thebosslookbarbers@gmail.com')
+  ('thebosslookbarbers@gmail.com'),
+  ('nkayappiah@icloud.com')
 on conflict (email) do nothing;
 
 drop policy if exists "Admin users can read appointments" on public.appointments;
