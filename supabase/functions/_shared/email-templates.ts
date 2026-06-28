@@ -1,6 +1,9 @@
 export const SHOP_NAME = "The Boss Look";
 export const SHOP_WEBSITE = "https://thebosslookgh.com";
 export const SHOP_PHONE = "0502963295";
+export const SHOP_LOGO_URL = `${SHOP_WEBSITE}/logo-cropped.png`;
+export const SHOP_INSTAGRAM_URL = "https://www.instagram.com/the_boss_look/";
+export const SHOP_TIKTOK_URL = "https://www.tiktok.com/@the_boss_look";
 
 export type AppointmentEmailData = {
   service: string;
@@ -191,6 +194,16 @@ function buildEmailShell(options: ShellOptions) {
     })
     .join("");
 
+  const socialLinksHtml = [
+    ["Website", SHOP_WEBSITE],
+    ["Instagram", SHOP_INSTAGRAM_URL],
+    ["TikTok", SHOP_TIKTOK_URL]
+  ]
+    .map(([label, url]) => {
+      return `<a href="${url}" style="color:#d5a15a;text-decoration:none;margin-right:14px;">${label}</a>`;
+    })
+    .join("");
+
   return (
     "<!DOCTYPE html>" +
     '<html lang="en">' +
@@ -207,6 +220,13 @@ function buildEmailShell(options: ShellOptions) {
     '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:640px;background:#171514;border:1px solid rgba(255,255,255,0.08);border-radius:18px;overflow:hidden;">' +
     "<tr>" +
     '<td style="padding:28px 28px 18px;background:linear-gradient(135deg,#251d12 0%,#171514 100%);border-bottom:1px solid rgba(255,255,255,0.08);">' +
+    '<table role="presentation" cellspacing="0" cellpadding="0" style="margin:0 0 18px;">' +
+    "<tr>" +
+    '<td style="width:84px;height:84px;border-radius:20px;background:#ffffff;padding:10px;text-align:center;vertical-align:middle;">' +
+    `<img src="${SHOP_LOGO_URL}" alt="${SHOP_NAME} logo" width="64" height="64" style="display:block;width:64px;height:64px;object-fit:contain;margin:0 auto;" />` +
+    "</td>" +
+    "</tr>" +
+    "</table>" +
     `<p style="margin:0 0 10px;color:#d5a15a;font-size:12px;letter-spacing:0.22em;text-transform:uppercase;">${escapeHtml(
       options.eyebrow
     )}</p>` +
@@ -233,6 +253,7 @@ function buildEmailShell(options: ShellOptions) {
     `<p style="margin:0;color:#aaa296;font-size:13px;line-height:1.7;">${escapeHtml(options.footerNote)}<br />Dome, Accra | Phone: ${escapeHtml(
       SHOP_PHONE
     )}</p>` +
+    `<p style="margin:12px 0 0;color:#bdb6ab;font-size:13px;line-height:1.7;">${socialLinksHtml}</p>` +
     "</td>" +
     "</tr>" +
     "</table>" +
