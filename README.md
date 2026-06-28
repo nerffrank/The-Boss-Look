@@ -20,7 +20,8 @@ Current booking scope:
 - local test mode for browser-only storage
 - shared backend mode via Supabase when configured
 - admin dashboard entry point at `admin.html`
-- notification-ready booking flow scaffold for future email automation
+- live booking emails through Supabase Edge Functions
+- admin booking actions routed through an Edge Function for cancellation emails and past-appointment cleanup
 
 ## Shared backend setup
 
@@ -56,6 +57,7 @@ The admin dashboard lets the shop:
 - review all bookings
 - filter by date and status
 - update bookings to pending, confirmed, completed, or cancelled
+- remove past appointments from the dashboard
 
 ## Booking notifications
 
@@ -64,16 +66,19 @@ The repo now includes a disabled-by-default notification path using a Supabase E
 Relevant files:
 - `BOOKING_NOTIFICATIONS_SETUP.md`
 - `supabase/functions/booking-notifications/index.ts`
+- `supabase/functions/admin-appointment-actions/index.ts`
 
-This future rollout will allow:
+This rollout now covers:
 - booking save into Supabase
 - customer acknowledgement email
 - internal shop notification email
+- customer cancellation email when an admin cancels a booking
+- past appointment removal from the admin dashboard
 
-Keep it disabled until the notification provider and function are fully tested.
+Keep it tested before turning it on for live use.
 
 ## Notes
 
-Client phone number and email are currently placeholders and can be updated once confirmed.
+Business email is live and booking emails now include the shop phone number `0502963295`.
 Before launch, shared backend mode should be enabled in `booking-config.js`.
 Before turning on automated booking emails, complete the steps in `BOOKING_NOTIFICATIONS_SETUP.md`.

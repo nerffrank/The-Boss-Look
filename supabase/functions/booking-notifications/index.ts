@@ -1,4 +1,9 @@
 import { createClient } from "npm:@supabase/supabase-js@2";
+import {
+  buildBookingCustomerEmail,
+  buildShopBookingAlertEmail,
+  normalizeTime
+} from "../_shared/email-templates.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -92,12 +97,13 @@ async function sendBookingEmails(appointment) {
   const result = { customer: "skipped", shop: "skipped", errors: [] };
 
   try {
+    const customerEmail = buildBookingCustomerEmail(appointment);
     await sendResendEmail(resendApiKey, {
       from: resendFromEmail,
       to: [appointment.customer_email],
-      subject: "We received your booking request - The Boss Look",
-      html: `<h1>The Boss Look</h1><p>We have received your booking request and the team will confirm your appointment by email.</p><p><strong>Date:</strong> ${escapeHtml(formatDisplayDate(appointment.booking_date))}<br /><strong>Time:</strong> ${escapeHtml(normalizeTime(appointment.booking_time))}<br /><strong>Service:</strong> ${escapeHtml(appointment.service || "In-shop consultation")}</p><p>If any detail needs changing, reply to this email before your slot.</p>`,
-      text: `The Boss Look\n\nWe have received your booking request and the team will confirm your appointment by email.\n\nDate: ${formatDisplayDate(appointment.booking_date)}\nTime: ${normalizeTime(appointment.booking_time)}\nService: ${appointment.service || "In-shop consultation"}\n`
+      subject: customerEmail.subject,
+      html: customerEmail.html,
+      text: customerEmail.text
     });
     result.customer = "sent";
   } catch (error) {
@@ -106,12 +112,13 @@ async function sendBookingEmails(appointment) {
 
   if (shopNotificationEmails.length) {
     try {
+      const shopEmail = buildShopBookingAlertEmail(appointment);
       await sendResendEmail(resendApiKey, {
         from: resendFromEmail,
         to: shopNotificationEmails,
-        subject: "New booking request - The Boss Look",
-        html: `<h1>New booking request</h1><p>A new appointment request has been created on the website.</p><p><strong>Name:</strong> ${escapeHtml(appointment.customer_name)}<br /><strong>Email:</strong> ${escapeHtml(appointment.customer_email)}<br /><strong>Phone:</strong> ${escapeHtml(appointment.customer_phone)}<br /><strong>Date:</strong> ${escapeHtml(formatDisplayDate(appointment.booking_date))}<br /><strong>Time:</strong> ${escapeHtml(normalizeTime(appointment.booking_time))}<br /><strong>Notes:</strong> ${escapeHtml(appointment.notes || "No notes provided.")}</p>`,
-        text: `New booking request\n\nName: ${appointment.customer_name}\nEmail: ${appointment.customer_email}\nPhone: ${appointment.customer_phone}\nDate: ${formatDisplayDate(appointment.booking_date)}\nTime: ${normalizeTime(appointment.booking_time)}\nNotes: ${appointment.notes || "No notes provided."}\n`
+        subject: shopEmail.subject,
+        html: shopEmail.html,
+        text: shopEmail.text
       });
       result.shop = "sent";
     } catch (error) {
@@ -142,19 +149,6 @@ async function sendResendEmail(apiKey, payload) {
   throw new Error(`Resend request failed (${response.status}): ${details}`);
 }
 
-function normalizeTime(value) {
-  return String(value || "").slice(0, 5);
-}
-
-function formatDisplayDate(value) {
-  return new Date(`${value}T00:00:00`).toLocaleDateString("en-GB", {
-    weekday: "short",
-    day: "numeric",
-    month: "short",
-    year: "numeric"
-  });
-}
-
 function isNotificationSendingEnabled() {
   return String(Deno.env.get("BOOKING_NOTIFICATION_EMAILS_ENABLED") || "").toLowerCase() === "true";
 }
@@ -164,15 +158,6 @@ function parseRecipientList(value) {
     .split(",")
     .map((item) => item.trim())
     .filter(Boolean);
-}
-
-function escapeHtml(value) {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#39;");
 }
 
 function jsonResponse(payload, status) {

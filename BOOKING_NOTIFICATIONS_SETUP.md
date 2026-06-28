@@ -3,9 +3,9 @@
 This project now includes a Supabase Edge Function scaffold for booking notification emails.
 
 Current status:
-- booking notifications are **built but disabled**
-- the live website still saves bookings directly into Supabase
-- no automatic emails are sent until you finish provider setup and switch the config on
+- booking notifications can run through the `booking-notifications` Edge Function
+- admin booking changes can run through the `admin-appointment-actions` Edge Function
+- customer and shop emails depend on your Resend and function-secret setup
 
 ## What the notification function does
 
@@ -18,11 +18,20 @@ When enabled, the `booking-notifications` function will:
 
 If email sending fails, the booking is still stored.
 
+The admin dashboard now uses a second function, `admin-appointment-actions`, to:
+
+1. update appointment statuses
+2. send a cancellation email when an appointment is cancelled
+3. remove past appointments from the dashboard safely
+
 ## Files involved
 
 - `booking-config.js`
 - `booking.js`
 - `supabase/functions/booking-notifications/index.ts`
+- `admin.js`
+- `supabase/functions/admin-appointment-actions/index.ts`
+- `supabase/functions/_shared/email-templates.ts`
 
 ## Recommended provider
 
@@ -54,8 +63,9 @@ If your Supabase dashboard only accepts `SERVICE_ROLE_KEY` in your workflow, tha
 Deploy the Edge Function in Supabase as:
 
 - function name: `booking-notifications`
+- function name: `admin-appointment-actions`
 
-The public site expects that function name by default.
+The public site and admin dashboard expect those function names by default.
 
 ## Keep notifications off at first
 
@@ -66,9 +76,9 @@ notificationMode: "disabled"
 ```
 
 This means:
-- public bookings keep using the current direct database insert
+- public bookings use the normal direct booking save path
 - no customer emails are sent yet
-- nothing changes for live users
+- admin cancellation emails stay off as well
 
 ## Turn it on later
 
@@ -88,25 +98,29 @@ notificationMode: "edge-function"
    - booking saved in `appointments`
    - customer email received
    - internal shop email received
+   - cancellation email received when an admin cancels a booking
 
 ## Suggested testing flow
 
 Test in this order:
 
 1. function deployed with `BOOKING_NOTIFICATION_EMAILS_ENABLED=false`
-2. switch local site config to `notificationMode: "edge-function"`
-3. make sure bookings still save
-4. enable email sending in the function secret
-5. test with one real email address
-6. only then push the notification-enabled config live
+2. deploy both `booking-notifications` and `admin-appointment-actions`
+3. switch local site config to `notificationMode: "edge-function"`
+4. make sure bookings still save
+5. enable email sending in the function secret
+6. test with one real email address
+7. cancel one test booking from the admin dashboard
+8. only then push the notification-enabled config live
 
 ## What is still not built
 
-This first version only covers:
+This version covers:
 - new booking acknowledgement
 - internal shop alert
+- cancellation email when admin cancels an appointment
+- safe removal of past appointments from the admin dashboard
 
-Still recommended for phase two:
+Still recommended for a future phase:
 - send email when admin confirms a booking
-- send email when admin cancels a booking
 - send reminder email before appointment time

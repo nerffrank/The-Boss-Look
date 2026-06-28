@@ -33,6 +33,7 @@ const metricToday = document.getElementById("metric-today");
 const metricPending = document.getElementById("metric-pending");
 const adminCurrentUrl = document.getElementById("admin-current-url");
 const adminAccessHint = document.getElementById("admin-access-hint");
+const adminActionFunctionName = adminConfig.adminActionFunctionName || "admin-appointment-actions";
 
 let adminClient = null;
 let cachedAppointments = [];
@@ -346,6 +347,7 @@ function renderAppointments() {
   filteredAppointments.forEach(function (appointment) {
     const card = document.createElement("article");
     card.className = "admin-card";
+    const isPast = isPastAppointment(appointment);
 
     card.innerHTML =
       '<div class="admin-card-top"><strong>' +
@@ -385,27 +387,118 @@ function renderAppointments() {
       actions.appendChild(button);
     });
 
+    if (isPast) {
+      const deleteButton = document.createElement("button");
+      deleteButton.type = "button";
+      deleteButton.textContent = "remove past booking";
+      deleteButton.className = "admin-delete-button";
+      deleteButton.addEventListener("click", function () {
+        removePastAppointment(appointment);
+      });
+      actions.appendChild(deleteButton);
+    }
+
     card.appendChild(actions);
     adminList.appendChild(card);
   });
 }
 
 async function updateAppointmentStatus(appointmentId, nextStatus) {
-  const { error } = await adminClient
-    .from("appointments")
-    .update({
-      status: nextStatus,
-      updated_at: new Date().toISOString()
-    })
-    .eq("id", appointmentId);
+  const actionResult = await runAdminAction({
+    action: "update-status",
+    appointmentId: appointmentId,
+    status: nextStatus
+  });
 
-  if (error) {
-    setAdminFeedback(error.message || "Could not update appointment status.", "error");
+  if (!actionResult.success) {
+    setAdminFeedback(actionResult.error || "Could not update appointment status.", "error");
     return;
   }
 
-  setAdminFeedback("Appointment status updated to " + nextStatus + ".", "success");
+  if (nextStatus === "cancelled") {
+    if (actionResult.notifications && actionResult.notifications.customer === "sent") {
+      setAdminFeedback("Appointment cancelled and customer notified by email.", "success");
+    } else if (actionResult.notifications && actionResult.notifications.customer === "failed") {
+      setAdminFeedback("Appointment cancelled, but the cancellation email could not be sent.", "error");
+    } else {
+      setAdminFeedback("Appointment cancelled.", "success");
+    }
+  } else {
+    setAdminFeedback("Appointment status updated to " + nextStatus + ".", "success");
+  }
+
   await loadAppointments();
+}
+
+async function removePastAppointment(appointment) {
+  if (!isPastAppointment(appointment)) {
+    setAdminFeedback("Only past appointments can be removed.", "error");
+    return;
+  }
+
+  const confirmed = window.confirm(
+    "Remove this past appointment permanently? This cannot be undone."
+  );
+
+  if (!confirmed) {
+    return;
+  }
+
+  const actionResult = await runAdminAction({
+    action: "delete-past-appointment",
+    appointmentId: appointment.id
+  });
+
+  if (!actionResult.success) {
+    setAdminFeedback(actionResult.error || "Could not remove the past appointment.", "error");
+    return;
+  }
+
+  setAdminFeedback("Past appointment removed from the dashboard.", "success");
+  await loadAppointments();
+}
+
+async function runAdminAction(payload) {
+  const sessionResult = await adminClient.auth.getSession();
+  const session = sessionResult.data.session;
+
+  if (!session || !session.access_token) {
+    return {
+      success: false,
+      error: "Your admin session expired. Please sign in again."
+    };
+  }
+
+  try {
+    const response = await fetch(supabaseFunctionUrl(adminActionFunctionName), {
+      method: "POST",
+      headers: {
+        apikey: adminConfig.supabaseAnonKey,
+        Authorization: "Bearer " + session.access_token,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await safeJson(response);
+
+    if (!response.ok) {
+      return {
+        success: false,
+        error: extractAdminActionMessage(data) || "The admin action could not be completed."
+      };
+    }
+
+    return {
+      success: true,
+      notifications: data.notifications || null
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: error && error.message ? error.message : "The admin action could not be completed."
+    };
+  }
 }
 
 function readAdminEmail() {
@@ -497,6 +590,10 @@ function formatBookingDate(dateString) {
   });
 }
 
+function isPastAppointment(appointment) {
+  return String(appointment.booking_date || "") < formatDate(new Date());
+}
+
 function escapeHtml(value) {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -556,6 +653,22 @@ function renderAccessNote() {
 
   adminAccessHint.textContent =
     "This live admin page can be used for everyday access once your authorised email is set up with a password.";
+}
+
+function supabaseFunctionUrl(functionName) {
+  return adminConfig.supabaseUrl.replace(/\/$/, "") + "/functions/v1/" + functionName;
+}
+
+async function safeJson(response) {
+  try {
+    return await response.json();
+  } catch (error) {
+    return {};
+  }
+}
+
+function extractAdminActionMessage(payload) {
+  return String(payload.error || payload.message || "");
 }
 
 function formatAdminAuthError(message) {

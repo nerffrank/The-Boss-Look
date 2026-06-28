@@ -295,6 +295,16 @@
   border-color: rgba(213, 161, 90, 0.5);
 }
 
+.admin-card-actions .admin-delete-button {
+  border-color: rgba(220, 104, 104, 0.32);
+  color: #f2a0a0;
+}
+
+.admin-card-actions .admin-delete-button:hover {
+  border-color: rgba(220, 104, 104, 0.65);
+  background: rgba(220, 104, 104, 0.08);
+}
+
 @media (max-width: 900px) {
   .admin-auth-panel,
   .admin-recovery-panel,

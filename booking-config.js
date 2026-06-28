@@ -9,5 +9,6 @@ window.bookingConfig = {
     "nkayappiah@icloud.com"
   ],
   notificationMode: "edge-function",
-  notificationFunctionName: "booking-notifications"
+  notificationFunctionName: "booking-notifications",
+  adminActionFunctionName: "admin-appointment-actions"
 };
