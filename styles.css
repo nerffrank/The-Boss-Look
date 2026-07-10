@@ -122,8 +122,9 @@ a {
   display: none;
   align-items: center;
   justify-content: center;
-  width: 52px;
+  min-width: 88px;
   height: 52px;
+  padding: 0 1rem;
   border: 1px solid rgba(213, 161, 90, 0.34);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.04);
@@ -132,17 +133,11 @@ a {
   transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
 }
 
-.nav-toggle span {
-  display: block;
-  width: 18px;
-  height: 2px;
-  border-radius: 999px;
-  background: currentColor;
-  transition: transform 180ms ease, opacity 180ms ease;
-}
-
-.nav-toggle span + span {
-  margin-top: 4px;
+.nav-toggle-label {
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.04rem;
+  text-transform: uppercase;
 }
 
 .nav-links a {
@@ -1379,16 +1374,9 @@ a.btn-solid,
     gap: 0.85rem;
   }
 
-  .navbar.menu-open .nav-toggle span:nth-child(1) {
-    transform: translateY(6px) rotate(45deg);
-  }
-
-  .navbar.menu-open .nav-toggle span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .navbar.menu-open .nav-toggle span:nth-child(3) {
-    transform: translateY(-6px) rotate(-45deg);
+  .navbar.menu-open .nav-toggle {
+    border-color: rgba(213, 161, 90, 0.58);
+    background: rgba(213, 161, 90, 0.14);
   }
 
   .hero {
