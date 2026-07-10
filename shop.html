@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Boss Look Shop | In-Store Products</title>
+  <meta
+    name="description"
+    content="Browse selected in-store products at The Boss Look in Dome, Accra. Footwear, clothing, hair care, and more featured items available at the studio."
+  />
+  <meta name="theme-color" content="#111111" />
+  <link rel="icon" type="image/png" href="logo-cropped.png" />
+  <link rel="apple-touch-icon" href="logo-cropped.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="subpage-body">
+  <header class="navbar">
+    <a class="brand" href="index.html#home" aria-label="The Boss Look home">
+      <img src="logo.png.png" alt="The Boss Look logo" />
+      <div class="brand-text">
+        <span class="brand-kicker">Premium Barber Studio</span>
+        <span class="brand-name">The Boss Look</span>
+      </div>
+    </a>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="primary-nav"
+      aria-label="Open navigation menu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="nav-links" id="primary-nav" aria-label="Primary navigation">
+      <a href="index.html#services">Services</a>
+      <a href="shop.html" aria-current="page">Shop</a>
+      <a href="index.html#gallery">Gallery</a>
+      <a href="index.html#hours">Hours</a>
+      <a href="index.html#book" class="nav-btn">Book Your Cut</a>
+    </nav>
+  </header>
+
+  <main class="subpage-main">
+    <section class="section subpage-hero">
+      <div class="subpage-hero-copy">
+        <p class="eyebrow">In-store shop</p>
+        <h1>Selected pieces available at The Boss Look.</h1>
+        <p class="hero-text">
+          A premium studio with a growing product lineup. Browse the footwear, apparel, and hair
+          care currently available in store, then ask the team about sizes, colours, and the latest
+          arrivals when you visit.
+        </p>
+
+        <div class="hero-actions">
+          <a href="index.html#book" class="btn btn-solid">Book Your Cut</a>
+          <a href="index.html#hours" class="btn btn-ghost">Visit the Shop</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shop-page-section" id="shop">
+      <div class="section-heading shop-heading">
+        <p class="eyebrow">Current showcase</p>
+        <h2>Browse selected items available at The Boss Look.</h2>
+        <p>
+          This page is for in-store viewing only. No checkout here, just a clean look at what the shop
+          is currently carrying while we build out the full lineup across footwear, clothing, and
+          grooming essentials.
+        </p>
+      </div>
+
+      <div class="shop-highlights" aria-label="Shop notes">
+        <article class="shop-highlight-card">
+          <strong>In-store only</strong>
+          <span>These items are sold directly at the studio, not through online checkout.</span>
+        </article>
+        <article class="shop-highlight-card">
+          <strong>Ask about sizes</strong>
+          <span>The team can help with available sizes, colours, and the latest stock at the shop.</span>
+        </article>
+        <article class="shop-highlight-card">
+          <strong>More drops coming</strong>
+          <span>This first set is only the beginning. More products will be added as new arrivals land.</span>
+        </article>
+      </div>
+
+      <section class="shop-category" aria-labelledby="hair-heading">
+        <div class="shop-category-head">
+          <p class="eyebrow">Hair care</p>
+          <h3 id="hair-heading">Shelf-ready grooming essentials.</h3>
+          <p>Daily wash and treatment options displayed cleanly so clients can browse in store.</p>
+        </div>
+
+        <div class="shop-carousel" data-shop-carousel>
+          <div class="shop-carousel-shell">
+            <button
+              class="shop-carousel-button shop-carousel-button-prev"
+              type="button"
+              data-carousel-prev
+              aria-label="View previous hair product"
+            >
+              &larr;
+            </button>
+
+            <div class="shop-carousel-viewport" data-carousel-viewport aria-label="Featured in-store hair products">
+              <div class="shop-carousel-track" data-carousel-track>
+                <article class="shop-card hair-card">
+                  <div class="hair-single">
+                    <div class="hair-image-frame">
+                      <img src="images/shop/easy-waves-relaxer-cutout.png" alt="Easy Waves Creme Relaxer available at The Boss Look" loading="lazy" />
+                    </div>
+                  </div>
+                  <div class="shop-card-body">
+                    <div class="shop-card-tags">
+                      <span class="shop-tag">Hair care</span>
+                      <span class="shop-tag shop-tag-muted">Small size</span>
+                    </div>
+                    <h3>Easy Waves Creme Relaxer</h3>
+                    <p>Regular-strength relaxer in the smaller jar size for smoother styling and easier upkeep.</p>
+                    <strong class="shop-price">GH&#8373;55</strong>
+                  </div>
+                </article>
+
+                <article class="shop-card hair-card">
+                  <div class="hair-single">
+                    <div class="hair-image-frame">
+                      <img src="images/shop/easy-waves-relaxer-super-cutout.png" alt="Easy Waves Creme Relaxer Super available at The Boss Look" loading="lazy" />
+                    </div>
+                  </div>
+                  <div class="shop-card-body">
+                    <div class="shop-card-tags">
+                      <span class="shop-tag">Hair care</span>
+                      <span class="shop-tag shop-tag-muted">Larger size</span>
+                    </div>
+                    <h3>Easy Waves Creme Relaxer Super</h3>
+                    <p>Super-strength relaxer in the larger jar size for clients who want a bigger treatment option.</p>
+                    <strong class="shop-price">GH&#8373;75</strong>
+                  </div>
+                </article>
+
+                <article class="shop-card hair-card">
+                  <div class="hair-single">
+                    <div class="hair-image-frame hair-image-frame-plain">
+                      <img src="images/shop/head-shoulders-classic-clean.jpeg" alt="Head and Shoulders Classic Clean shampoo available at The Boss Look" loading="lazy" />
+                    </div>
+                  </div>
+                  <div class="shop-card-body">
+                    <div class="shop-card-tags">
+                      <span class="shop-tag">Hair care</span>
+                      <span class="shop-tag shop-tag-muted">Shampoo</span>
+                    </div>
+                    <h3>Head &amp; Shoulders Classic Clean</h3>
+                    <p>Classic clean daily shampoo for a fresh scalp and a straightforward grooming routine.</p>
+                    <strong class="shop-price">GH&#8373;100</strong>
+                  </div>
+                </article>
+
+                <article class="shop-card hair-card">
+                  <div class="hair-single">
+                    <div class="hair-image-frame">
+                      <img src="images/shop/coconut-shea-butter-cutout.png" alt="Coconut Oil and Shea Butter Natural Hair Food available at The Boss Look" loading="lazy" />
+                    </div>
+                  </div>
+                  <div class="shop-card-body">
+                    <div class="shop-card-tags">
+                      <span class="shop-tag">Hair care</span>
+                      <span class="shop-tag shop-tag-muted">Shea cream</span>
+                    </div>
+                    <h3>Coconut Oil &amp; Shea Butter Hair Food</h3>
+                    <p>MGL Naturals shea butter cream blended with coconut oil for daily moisture and hair nourishment.</p>
+                    <strong class="shop-price">GH&#8373;90</strong>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <button
+              class="shop-carousel-button shop-carousel-button-next"
+              type="button"
+              data-carousel-next
+              aria-label="View next hair product"
+            >
+              &rarr;
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="shop-category" aria-labelledby="footwear-heading">
+        <div class="shop-category-head">
+          <p class="eyebrow">Footwear</p>
+          <h3 id="footwear-heading">Slides available in store.</h3>
+          <p>Premium colourways that can be viewed and bought directly at the shop.</p>
+        </div>
+
+        <div class="shop-carousel" data-shop-carousel>
+          <div class="shop-carousel-shell">
+            <button
+              class="shop-carousel-button shop-carousel-button-prev"
+              type="button"
+              data-carousel-prev
+              aria-label="View previous footwear item"
+            >
+              &larr;
+            </button>
+
+            <div class="shop-carousel-viewport" data-carousel-viewport aria-label="Featured in-store footwear">
+              <div class="shop-carousel-track" data-carousel-track>
+          <article class="shop-card">
+            <div class="shop-card-media">
+              <img src="images/shop/birkenstock-black.jpg" alt="Black double-strap slides available at The Boss Look" loading="lazy" />
+            </div>
+            <div class="shop-card-body">
+              <div class="shop-card-tags">
+                <span class="shop-tag">Footwear</span>
+                <span class="shop-tag shop-tag-muted">Black</span>
+              </div>
+              <h3>Double-Strap Slides</h3>
+              <p>Black finish with a clean everyday look.</p>
+              <strong class="shop-price">GH&#8373;400</strong>
+            </div>
+          </article>
+
+          <article class="shop-card">
+            <div class="shop-card-media">
+              <img src="images/shop/birkenstock-burgundy.jpg" alt="Burgundy double-strap slides available at The Boss Look" loading="lazy" />
+            </div>
+            <div class="shop-card-body">
+              <div class="shop-card-tags">
+                <span class="shop-tag">Footwear</span>
+                <span class="shop-tag shop-tag-muted">Burgundy</span>
+              </div>
+              <h3>Double-Strap Slides</h3>
+              <p>Burgundy tone for a more dressed-up finish.</p>
+              <strong class="shop-price">GH&#8373;400</strong>
+            </div>
+          </article>
+
+          <article class="shop-card">
+            <div class="shop-card-media">
+              <img src="images/shop/birkenstock-stone.jpg" alt="Stone double-strap slides available at The Boss Look" loading="lazy" />
+            </div>
+            <div class="shop-card-body">
+              <div class="shop-card-tags">
+                <span class="shop-tag">Footwear</span>
+                <span class="shop-tag shop-tag-muted">Stone</span>
+              </div>
+              <h3>Double-Strap Slides</h3>
+              <p>Soft stone colour with a light neutral feel.</p>
+              <strong class="shop-price">GH&#8373;400</strong>
+            </div>
+          </article>
+
+          <article class="shop-card">
+            <div class="shop-card-media">
+              <img src="images/shop/birkenstock-taupe.jpg" alt="Taupe double-strap slides available at The Boss Look" loading="lazy" />
+            </div>
+            <div class="shop-card-body">
+              <div class="shop-card-tags">
+                <span class="shop-tag">Footwear</span>
+                <span class="shop-tag shop-tag-muted">Taupe</span>
+              </div>
+              <h3>Double-Strap Slides</h3>
+              <p>Taupe finish that fits easily into everyday wear.</p>
+              <strong class="shop-price">GH&#8373;400</strong>
+            </div>
+          </article>
+
+          <article class="shop-card">
+            <div class="shop-card-media">
+              <img src="images/shop/birkenstock-olive.jpg" alt="Olive double-strap slides available at The Boss Look" loading="lazy" />
+            </div>
+            <div class="shop-card-body">
+              <div class="shop-card-tags">
+                <span class="shop-tag">Footwear</span>
+                <span class="shop-tag shop-tag-muted">Olive</span>
+              </div>
+              <h3>Double-Strap Slides</h3>
+              <p>Olive tone with a bolder colour choice.</p>
+              <strong class="shop-price">GH&#8373;400</strong>
+            </div>
+          </article>
+
+          <article class="shop-card">
+            <div class="shop-card-media">
+              <img src="images/shop/birkenstock-forest-green.jpg" alt="Forest green double-strap slides available at The Boss Look" loading="lazy" />
+            </div>
+            <div class="shop-card-body">
+              <div class="shop-card-tags">
+                <span class="shop-tag">Footwear</span>
+                <span class="shop-tag shop-tag-muted">Forest green</span>
+              </div>
+              <h3>Double-Strap Slides</h3>
+              <p>Deep forest-green finish with a richer tone across the straps.</p>
+              <strong class="shop-price">GH&#8373;400</strong>
+            </div>
+          </article>
+              </div>
+            </div>
+
+            <button
+              class="shop-carousel-button shop-carousel-button-next"
+              type="button"
+              data-carousel-next
+              aria-label="View next footwear item"
+            >
+              &rarr;
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="shop-category" aria-labelledby="apparel-heading">
+        <div class="shop-category-head">
+          <p class="eyebrow">Clothing</p>
+          <h3 id="apparel-heading">Motive apparel drop.</h3>
+          <p>Graphic tees and a standout long-sleeve piece added to the in-store lineup.</p>
+        </div>
+
+        <div class="shop-carousel" data-shop-carousel>
+          <div class="shop-carousel-shell">
+            <button
+              class="shop-carousel-button shop-carousel-button-prev"
+              type="button"
+              data-carousel-prev
+              aria-label="View previous clothing item"
+            >
+              &larr;
+            </button>
+
+            <div class="shop-carousel-viewport" data-carousel-viewport aria-label="Featured in-store clothing">
+              <div class="shop-carousel-track shop-carousel-track-apparel" data-carousel-track>
+                <article class="shop-card apparel-card">
+                  <div class="apparel-pair">
+                    <div class="apparel-image-frame">
+                      <img src="images/shop/motive-fiery-feet-graphic-cutout.png" alt="Graphic side of the Motive Fiery Feet Glow in the Dark Tee" loading="lazy" />
+                    </div>
+                    <div class="apparel-image-frame">
+                      <img src="images/shop/motive-fiery-feet-logo-cutout.png" alt="Logo side of the Motive Fiery Feet Glow in the Dark Tee" loading="lazy" />
+                    </div>
+                  </div>
+                  <div class="shop-card-body">
+                    <div class="shop-card-tags">
+                      <span class="shop-tag">Clothing</span>
+                      <span class="shop-tag shop-tag-muted">Short sleeve</span>
+                    </div>
+                    <h3>Motive&reg; Fiery Feet Glow in the Dark Tee</h3>
+                    <p>Black glow-in-the-dark tee shown with graphic and logo sides.</p>
+                    <strong class="shop-price">GH&#8373;400</strong>
+                  </div>
+                </article>
+
+                <article class="shop-card apparel-card">
+                  <div class="apparel-pair">
+                    <div class="apparel-image-frame">
+                      <img src="images/shop/motive-white-front-cutout.png" alt="Front view of the white Motive graphic t-shirt" loading="lazy" />
+                    </div>
+                    <div class="apparel-image-frame">
+                      <img src="images/shop/motive-white-back-cutout.png" alt="Back view of the white Motive graphic t-shirt" loading="lazy" />
+                    </div>
+                  </div>
+                  <div class="shop-card-body">
+                    <div class="shop-card-tags">
+                      <span class="shop-tag">Clothing</span>
+                      <span class="shop-tag shop-tag-muted">Short sleeve</span>
+                    </div>
+                    <h3>Motive Graphic Tee</h3>
+                    <p>White tee shown with front and back graphics.</p>
+                    <strong class="shop-price">GH&#8373;400</strong>
+                  </div>
+                </article>
+
+                <article class="shop-card apparel-card">
+                  <div class="apparel-single">
+                    <div class="apparel-image-frame">
+                      <img src="images/shop/motive-long-sleeve-cutout.png" alt="Long-sleeve Motive jersey in yellow, black, and blue" loading="lazy" />
+                    </div>
+                  </div>
+                  <div class="shop-card-body">
+                    <div class="shop-card-tags">
+                      <span class="shop-tag">Clothing</span>
+                      <span class="shop-tag shop-tag-muted">Long sleeve</span>
+                    </div>
+                    <h3>Motive Long-Sleeve Jersey</h3>
+                    <p>A bold motorsport-inspired piece with a standout studio-ready look.</p>
+                    <strong class="shop-price">GH&#8373;750</strong>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <button
+              class="shop-carousel-button shop-carousel-button-next"
+              type="button"
+              data-carousel-next
+              aria-label="View next clothing item"
+            >
+              &rarr;
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#book">Book Your Cut</a>
+      <a href="mailto:thebosslookbarbers@gmail.com">Email Us</a>
+      <a href="https://maps.app.goo.gl/9d3j5H4pMuAw9FUg9?g_st=iw" target="_blank" rel="noreferrer">Get Directions</a>
+      <a href="https://www.instagram.com/the_boss_look/" target="_blank" rel="noreferrer">Instagram</a>
+      <a href="https://www.tiktok.com/@the_boss_look" target="_blank" rel="noreferrer">TikTok</a>
+    </div>
+    <p>&copy; 2026 The Boss Look. Premium barber studio in Dome, Accra.</p>
+  </footer>
+
+  <script>
+    const nav = document.querySelector(".navbar");
+    const navToggle = document.querySelector(".nav-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
+    function setMobileMenu(open) {
+      if (!nav || !navToggle) {
+        return;
+      }
+
+      nav.classList.toggle("menu-open", open);
+      navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+      navToggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
+    }
+
+    if (navToggle && navLinks) {
+      navToggle.addEventListener("click", function () {
+        setMobileMenu(!nav.classList.contains("menu-open"));
+      });
+
+      navLinks.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+          setMobileMenu(false);
+        });
+      });
+
+      window.addEventListener("resize", function () {
+        if (window.innerWidth > 980) {
+          setMobileMenu(false);
+        }
+      });
+    }
+
+    window.addEventListener("scroll", function () {
+      nav.classList.toggle("scrolled", window.scrollY > 40);
+    });
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const revealTargets = Array.from(
+      document.querySelectorAll(".subpage-hero-copy, .section-heading, .shop-highlight-card, .shop-card")
+    );
+
+    revealTargets.forEach(function (item, index) {
+      item.classList.add("reveal");
+      item.style.setProperty("--reveal-delay", (index % 3) * 90 + "ms");
+    });
+
+    if (prefersReducedMotion) {
+      revealTargets.forEach(function (item) {
+        item.classList.add("is-visible");
+      });
+    } else if ("IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver(
+        function (entries, observer) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) {
+              return;
+            }
+
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.16, rootMargin: "0px 0px -60px 0px" }
+      );
+
+      revealTargets.forEach(function (item) {
+        revealObserver.observe(item);
+      });
+    } else {
+      revealTargets.forEach(function (item) {
+        item.classList.add("is-visible");
+      });
+    }
+
+    document.querySelectorAll("[data-shop-carousel]").forEach(function (carousel) {
+      const viewport = carousel.querySelector("[data-carousel-viewport]");
+      const track = carousel.querySelector("[data-carousel-track]");
+      const prev = carousel.querySelector("[data-carousel-prev]");
+      const next = carousel.querySelector("[data-carousel-next]");
+
+      if (!viewport || !track || !prev || !next) {
+        return;
+      }
+
+      function getStep() {
+        const firstCard = track.querySelector(".shop-card");
+        const gap = parseFloat(window.getComputedStyle(track).gap || "0");
+
+        if (!firstCard) {
+          return viewport.clientWidth * 0.9;
+        }
+
+        return firstCard.getBoundingClientRect().width + gap;
+      }
+
+      function updateButtons() {
+        const maxScrollLeft = viewport.scrollWidth - viewport.clientWidth - 2;
+        prev.disabled = viewport.scrollLeft <= 2;
+        next.disabled = viewport.scrollLeft >= maxScrollLeft;
+      }
+
+      prev.addEventListener("click", function () {
+        viewport.scrollBy({
+          left: -getStep(),
+          behavior: prefersReducedMotion ? "auto" : "smooth"
+        });
+      });
+
+      next.addEventListener("click", function () {
+        viewport.scrollBy({
+          left: getStep(),
+          behavior: prefersReducedMotion ? "auto" : "smooth"
+        });
+      });
+
+      viewport.addEventListener("scroll", updateButtons, { passive: true });
+      window.addEventListener("resize", updateButtons);
+      updateButtons();
+    });
+  </script>
+</body>
+</html>

@@ -1,6 +1,6 @@
-node_modules/
-.supabase/
+.codex-remote-attachments/
 .supabase-cli-home*/
+.supabase-cli-project-*/
 .supabase-cli-project*/
+node_modules/
 supabase/.temp/
-supabase/supabase/

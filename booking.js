@@ -10,12 +10,12 @@ const defaultServiceLabel = "In-shop consultation";
 
 const openingHours = {
   0: { start: "14:00", end: "22:00" },
-  1: { start: "10:00", end: "21:00" },
-  2: { start: "10:00", end: "21:00" },
-  3: { start: "10:00", end: "21:00" },
-  4: { start: "10:00", end: "21:00" },
-  5: { start: "10:00", end: "21:00" },
-  6: { start: "10:00", end: "21:00" }
+  1: { start: "09:00", end: "21:00" },
+  2: { start: "09:00", end: "21:00" },
+  3: { start: "09:00", end: "21:00" },
+  4: { start: "09:00", end: "21:00" },
+  5: { start: "09:00", end: "21:00" },
+  6: { start: "09:00", end: "21:00" }
 };
 
 const dateInput = document.getElementById("booking-date");

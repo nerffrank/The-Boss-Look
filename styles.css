@@ -37,6 +37,13 @@ body {
   line-height: 1.6;
 }
 
+.subpage-body {
+  background:
+    radial-gradient(circle at top left, rgba(213, 161, 90, 0.12), transparent 24%),
+    radial-gradient(circle at right 18%, rgba(213, 161, 90, 0.08), transparent 18%),
+    linear-gradient(180deg, #15110d 0%, #101010 42%, #141414 100%);
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -228,6 +235,11 @@ a.btn-solid,
   margin: 0 auto;
 }
 
+.subpage-main {
+  min-height: 100vh;
+  padding-top: 7.6rem;
+}
+
 .hero-grid {
   display: block;
   min-height: calc(92vh - 13rem);
@@ -237,6 +249,45 @@ a.btn-solid,
   max-width: 700px;
   animation: hero-entrance 820ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
   transition: transform 260ms ease-out;
+}
+
+.subpage-hero {
+  padding-top: 2rem;
+  padding-bottom: 2.5rem;
+}
+
+.subpage-hero-copy {
+  max-width: 760px;
+}
+
+.subpage-hero-copy h1 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(3.4rem, 7vw, 5.9rem);
+  font-weight: 400;
+  line-height: 0.94;
+  margin: 0.9rem 0 1.2rem;
+}
+
+.shop-page-section {
+  padding-top: 1rem;
+}
+
+.shop-category + .shop-category {
+  margin-top: 3rem;
+}
+
+.shop-category-head {
+  max-width: 40rem;
+  margin-bottom: 1.25rem;
+}
+
+.shop-category-head h3 {
+  font-size: 1.9rem;
+  margin: 0.35rem 0 0.5rem;
+}
+
+.shop-category-head p:last-child {
+  color: rgba(247, 241, 232, 0.74);
 }
 
 .hero h1,
@@ -408,8 +459,7 @@ a.btn-solid,
 }
 
 .gallery-viewport,
-.team-media-frame,
-.opening-poster {
+.team-media-frame {
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -515,7 +565,7 @@ a.btn-solid,
 }
 
 .opening-grid {
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
 }
 
@@ -609,17 +659,6 @@ a.btn-solid,
   color: rgba(247, 241, 232, 0.72);
 }
 
-.opening-poster {
-  max-width: 320px;
-  justify-self: end;
-}
-
-.opening-poster img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
 .section-actions,
 .contact-actions,
 .footer-links {
@@ -645,6 +684,297 @@ a.btn-solid,
 .price-list {
   display: grid;
   gap: 1rem;
+}
+
+.shop-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.6rem;
+}
+
+.shop-highlight-card,
+.shop-card {
+  background:
+    linear-gradient(180deg, rgba(213, 161, 90, 0.11), rgba(255, 255, 255, 0.02)),
+    var(--panel-strong);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.shop-highlight-card {
+  display: grid;
+  gap: 0.45rem;
+  padding: 1.25rem 1.35rem;
+}
+
+.shop-highlight-card strong {
+  font-size: 1rem;
+}
+
+.shop-highlight-card span {
+  color: rgba(247, 241, 232, 0.72);
+  font-size: 0.95rem;
+}
+
+.shop-carousel {
+  display: grid;
+  gap: 0.95rem;
+}
+
+.shop-carousel-shell {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) 52px;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.shop-carousel-button {
+  width: 52px;
+  height: 52px;
+  border: 1px solid rgba(213, 161, 90, 0.34);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, opacity 180ms ease;
+}
+
+.shop-carousel-button:hover,
+.shop-carousel-button:focus-visible {
+  transform: translateY(-1px);
+  border-color: var(--accent);
+  background: rgba(213, 161, 90, 0.14);
+}
+
+.shop-carousel-button:disabled {
+  opacity: 0.35;
+  cursor: default;
+  transform: none;
+}
+
+.shop-carousel-viewport {
+  min-width: 0;
+  overflow-x: auto;
+  padding: 0.2rem 0 0.8rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.shop-carousel-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.shop-carousel-track {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+  width: max-content;
+}
+
+.shop-carousel-track .shop-card {
+  flex: 0 0 auto;
+  width: clamp(270px, 28vw, 330px);
+  min-height: 35rem;
+  scroll-snap-align: start;
+}
+
+.shop-carousel-track-apparel .shop-card {
+  width: clamp(320px, 40vw, 470px);
+  min-height: 43.5rem;
+}
+
+.shop-card {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  overflow: hidden;
+  height: 100%;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.shop-highlight-card {
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.shop-card-media {
+  height: 16.5rem;
+  background: linear-gradient(180deg, rgba(245, 236, 224, 0.96), rgba(223, 196, 158, 0.82));
+  overflow: hidden;
+}
+
+.shop-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 420ms ease;
+}
+
+.shop-card-body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 1.2rem 1.2rem 1.35rem;
+}
+
+.shop-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.shop-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(213, 161, 90, 0.24);
+  background: rgba(213, 161, 90, 0.12);
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04rem;
+  text-transform: uppercase;
+}
+
+.shop-tag-muted {
+  border-color: var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(247, 241, 232, 0.68);
+}
+
+.shop-card h3 {
+  font-size: 1.32rem;
+  line-height: 1.1;
+}
+
+.shop-card p {
+  margin: 0;
+  color: rgba(247, 241, 232, 0.74);
+  font-size: 0.95rem;
+}
+
+.shop-price {
+  margin-top: auto;
+  color: var(--accent);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.shop-card:hover .shop-card-media img {
+  transform: scale(1.03);
+}
+
+.apparel-card {
+  overflow: hidden;
+}
+
+.apparel-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  min-height: 22.5rem;
+  padding: 1rem 1rem 0;
+}
+
+.apparel-single {
+  display: block;
+  min-height: 22.5rem;
+  padding: 1rem 1rem 0;
+}
+
+.apparel-card .shop-card-body {
+  padding-top: 1rem;
+}
+
+.apparel-image-frame {
+  display: grid;
+  height: 100%;
+  place-items: center;
+  padding: 1rem;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.92), rgba(243, 232, 214, 0.96) 72%),
+    #f5efe6;
+  overflow: hidden;
+}
+
+.apparel-image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 420ms ease;
+}
+
+.apparel-card:hover .apparel-image-frame img {
+  transform: scale(1.02);
+}
+
+.hair-card {
+  overflow: hidden;
+}
+
+.hair-single {
+  display: block;
+  min-height: 22.5rem;
+  padding: 1rem 1rem 0;
+}
+
+.hair-image-frame {
+  display: grid;
+  height: 100%;
+  place-items: center;
+  padding: 1.15rem;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.95), rgba(244, 233, 215, 0.94) 68%, rgba(224, 194, 149, 0.82)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0));
+  overflow: hidden;
+}
+
+.hair-image-frame img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 18.5rem;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 30px rgba(12, 10, 8, 0.2));
+  transition: transform 420ms ease;
+}
+
+.hair-image-frame-plain {
+  padding: 0.6rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(245, 239, 231, 0.96)),
+    #f7f2ea;
+}
+
+.hair-image-frame-plain img {
+  filter: none;
+}
+
+.hair-card:hover .hair-image-frame img {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.hair-card h3 {
+  min-height: 2.3em;
+}
+
+.hair-card p {
+  min-height: 4.2em;
 }
 
 .price-item {
@@ -991,12 +1321,13 @@ a.btn-solid,
 
 @media (hover: hover) {
   .price-item:hover,
+  .shop-highlight-card:hover,
+  .shop-card:hover,
   .experience-list article:hover,
   .hours-card:hover,
   .contact-card:hover,
   .booking-card:hover,
   .team-media-frame:hover,
-  .opening-poster:hover,
   .gallery-viewport:hover {
     transform: translateY(-4px);
     border-color: rgba(213, 161, 90, 0.28);
@@ -1014,6 +1345,7 @@ a.btn-solid,
   .navbar,
   .navbar.scrolled,
   .hero,
+  .subpage-main,
   .section,
   .footer {
     padding-left: 1.25rem;
@@ -1063,11 +1395,16 @@ a.btn-solid,
     padding-top: 8.5rem;
   }
 
+  .subpage-main {
+    padding-top: 7.8rem;
+  }
+
   .hero-grid,
   .experience-grid,
   .team-grid,
   .opening-grid,
   .schedule-grid,
+  .shop-highlights,
   .booking-layout,
   .booking-form-grid {
     grid-template-columns: 1fr;
@@ -1077,8 +1414,22 @@ a.btn-solid,
     grid-template-columns: 1fr;
   }
 
-  .opening-poster {
-    justify-self: start;
+  .shop-carousel-shell {
+    grid-template-columns: 46px minmax(0, 1fr) 46px;
+    gap: 0.75rem;
+  }
+
+  .shop-carousel-button {
+    width: 46px;
+    height: 46px;
+  }
+
+  .shop-carousel-track .shop-card {
+    width: clamp(250px, 42vw, 320px);
+  }
+
+  .shop-carousel-track-apparel .shop-card {
+    width: clamp(300px, 64vw, 420px);
   }
 
   .service-track {
@@ -1112,6 +1463,10 @@ a.btn-solid,
 
   .hero h1 {
     font-size: 3.4rem;
+  }
+
+  .subpage-hero-copy h1 {
+    font-size: 3.1rem;
   }
 
   .section h2,
@@ -1152,6 +1507,47 @@ a.btn-solid,
     align-items: flex-start;
   }
 
+  .shop-carousel-shell {
+    grid-template-columns: 42px minmax(0, 1fr) 42px;
+    gap: 0.55rem;
+  }
+
+  .shop-carousel-button {
+    width: 42px;
+    height: 42px;
+    font-size: 1rem;
+  }
+
+  .shop-carousel-track .shop-card,
+  .shop-carousel-track-apparel .shop-card {
+    width: min(82vw, 320px);
+  }
+
+  .shop-carousel-track .shop-card {
+    min-height: 32rem;
+  }
+
+  .shop-carousel-track-apparel .shop-card {
+    min-height: 39rem;
+  }
+
+  .apparel-pair {
+    grid-template-columns: 1fr;
+    min-height: 30rem;
+  }
+
+  .hair-single {
+    min-height: 19rem;
+  }
+
+  .hair-image-frame img {
+    max-height: 16rem;
+  }
+
+  .shop-card-media {
+    height: 15rem;
+  }
+
   .contact-actions .btn,
   .section-actions .btn {
     width: 100%;
@@ -1179,12 +1575,14 @@ a.btn-solid,
   .btn,
   .nav-btn,
   .price-item,
+  .shop-highlight-card,
+  .shop-card,
+  .shop-card-media img,
   .experience-list article,
   .hours-card,
   .contact-card,
   .booking-card,
   .team-media-frame,
-  .opening-poster,
   .gallery-viewport {
     animation: none !important;
     transition: none !important;
